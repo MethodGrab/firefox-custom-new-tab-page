@@ -14,6 +14,7 @@ To set your custom new tab url:
 ## Development
 
 Testing unsigned extensions only works with [non-release](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/jpm#Install_a_different_version_of_Firefox) [builds](https://wiki.mozilla.org/Add-ons/Extension_Signing). To install the unsigned extension:
+
 - Open Firefox Developer Edition
 - Install the [Extension Auto-Installer](https://addons.mozilla.org/en-US/firefox/addon/autoinstaller) add-on
 - Open `about:config`
@@ -34,5 +35,6 @@ To show [log messages](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/con
 ## Release Process
 
 After making changes to the extension, do the following to publish a new version:
+
 1. `npm run package` to bundle the `xpi` file
 1. Upload the generated `xpi` to https://addons.mozilla.org/en-US/developers/addons
