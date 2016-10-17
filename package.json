@@ -1,4 +1,5 @@
 {
+  "private": true,
   "title": "Custom New Tab Page",
   "name": "custom-new-tab-page",
   "id": "custom-new-tab-page@mint.as",
