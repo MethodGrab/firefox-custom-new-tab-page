@@ -1,0 +1,11 @@
+.DS_Store
+
+*.zip
+*.xpi
+
+.git
+node_modules
+
+.eslintrc.js
+.gitignore
+yarn.lock
