@@ -1,5 +1,5 @@
 # Custom New Tab Page
-> Specify a custom URL to show when opening new tabs, _without changing the address bar_.
+> A Firefox extension that allows you to specify a custom URL to be shown when opening a new tab, _without changing the address bar content_.
 
 
 ## Usage
@@ -22,7 +22,7 @@ Testing unsigned extensions only works with [non-release](https://developer.mozi
 - `npm run start` to load Firefox Developer Edition with the extension installed
 - `npm run watch` to watch for changes and [reload the extension automatically](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/jpm#Developing_without_browser_restarts)
 
-_NB: These `npm` commands assume you're on Windows with Firefox Developer Edition installed, modify the paths as needed._
+**Note: These `npm` commands assume you're on Windows with Firefox Developer Edition installed, modify the paths as needed.**
 
 
 ### Logging

@@ -3,7 +3,7 @@
   "name": "custom-new-tab-page",
   "id": "custom-new-tab-page@mint.as",
   "version": "0.1.0",
-  "description": "Specify a custom URL to show when opening new tabs, without changing the address bar",
+  "description": "A Firefox extension that allows you to specify a custom URL to be shown when opening a new tab, without changing the address bar content",
   "homepage": "https://github.com/methodgrab/firefox-custom-new-tab-page",
   "main": "index.js",
   "author": "MethodGrab",
