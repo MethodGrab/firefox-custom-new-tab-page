@@ -1,0 +1,23 @@
+.cntp-has-loaded *,
+.cntp-has-loaded *:before,
+.cntp-has-loaded *:after {
+	margin: 0;
+	padding: 0;
+}
+
+.cntp-has-loaded body {
+	display: block;
+	position: relative;
+	overflow: hidden;
+	width: 100vw;
+	height: 100vh;
+}
+
+.cntp-has-loaded .cntp__iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	border: 0;
+}

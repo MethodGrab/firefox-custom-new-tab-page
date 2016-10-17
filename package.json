@@ -1,0 +1,42 @@
+{
+  "title": "Custom New Tab Page",
+  "name": "custom-new-tab-page",
+  "id": "custom-new-tab-page@mint.as",
+  "version": "0.1.0",
+  "description": "Specify a custom URL to show when opening new tabs, without changing the address bar",
+  "homepage": "https://github.com/methodgrab/firefox-custom-new-tab-page",
+  "main": "index.js",
+  "author": "MethodGrab",
+  "engines": {
+    "firefox": ">=38.0a1"
+  },
+  "license": "ISC",
+  "keywords": [
+    "custom",
+    "new",
+    "tab",
+    "page",
+    "url"
+  ],
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "eslint **/*.js",
+    "start": "jpm run --binary \"C:\\Program Files (x86)\\Firefox Developer Edition\\firefox.exe\" -p dev-edition-default",
+    "watch": "jpm watchpost --post-url http://localhost:8888/",
+    "package": "jpm xpi"
+  },
+  "devDependencies": {
+    "@methodgrab/eslint-config-standard": "^0.10.0",
+    "eslint": "^3.8.0",
+    "jpm": "^1.2.2"
+  },
+  "preferences": [
+    {
+      "name": "customNewTabUrl",
+      "title": "New Tab URL",
+      "description": "The URL to show when a new tab is opened",
+      "type": "string",
+      "value": ""
+    }
+  ]
+}
