@@ -31,6 +31,9 @@
     "eslint": "^3.8.0",
     "jpm": "^1.2.2"
   },
+  "permissions": {
+    "multiprocess": true
+  },
   "preferences": [
     {
       "name": "customNewTabUrl",
