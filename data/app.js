@@ -9,7 +9,7 @@ const showCustomPage = customNewTabUrl => {
 
 	document.querySelector( 'html' ).classList.add( 'cntp-has-loaded' );
 
-	const content = `<iframe class="cntp__iframe" src="${customNewTabUrl}"></iframe>`;
+	const content = `<iframe type="content" class="cntp__iframe" src="${customNewTabUrl}"></iframe>`;
 	document.body.innerHTML = content;
 
 	return true;
