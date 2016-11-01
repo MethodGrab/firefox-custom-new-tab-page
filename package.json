@@ -38,7 +38,7 @@
     {
       "name": "customNewTabUrl",
       "title": "New Tab URL",
-      "description": "The URL to show when a new tab is opened",
+      "description": "The URL to show when a new tab is opened.\nIt should include the \"https\" or \"http\" part.\ne.g. \"https://google.com\".",
       "type": "string",
       "value": ""
     }
