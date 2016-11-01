@@ -13,9 +13,13 @@ const showCustomPage = customNewTabUrl => {
 	// giving the iframe a privileged context that could be used to
 	// access browser (cookies, history, etc) or user files.
 	// See https://mdn.io/Displaying_web_content_in_an_extension_without_security_issues
-	const content = `<iframe type="content" class="cntp__iframe" src="${customNewTabUrl}"></iframe>`;
+	const iframe = document.createElement( 'iframe' );
+	iframe.setAttribute( 'type', 'content' );
+	iframe.className = 'cntp__iframe';
+	iframe.src       = customNewTabUrl;
 
-	document.body.innerHTML = content;
+	document.body.textContent = '';
+	document.body.appendChild( iframe );
 
 	return true;
 };
