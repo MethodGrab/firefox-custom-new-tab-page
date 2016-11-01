@@ -2,9 +2,9 @@ const showCustomPage = customNewTabUrl => {
 	console.debug( '[showCustomPage] init', { customNewTabUrl } );
 
 	// no tab URL set, do nothing
-	if ( !customNewTabUrl || !customNewTabUrl.length ) {
+	if ( !customNewTabUrl || customNewTabUrl.length === 0 ) {
 		console.debug( '[showCustomPage] no tab url set' );
-		return false;
+		return;
 	}
 
 	document.querySelector( 'html' ).classList.add( 'cntp-has-loaded' );
@@ -20,8 +20,6 @@ const showCustomPage = customNewTabUrl => {
 
 	document.body.textContent = '';
 	document.body.appendChild( iframe );
-
-	return true;
 };
 
 self.port.on( 'showCustomPage', showCustomPage );
