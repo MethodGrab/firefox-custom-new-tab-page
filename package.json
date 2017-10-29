@@ -1,16 +1,11 @@
 {
   "private": true,
-  "title": "Custom New Tab Page",
   "name": "custom-new-tab-page",
-  "id": "custom-new-tab-page@mint.as",
-  "version": "0.1.2",
+  "version": "0.0.0",
   "description": "A Firefox extension that allows you to specify a custom URL to be shown when opening a new tab, without changing the address bar content",
   "homepage": "https://github.com/methodgrab/firefox-custom-new-tab-page",
-  "main": "index.js",
+  "main": "",
   "author": "MethodGrab",
-  "engines": {
-    "firefox": ">=38.0a1"
-  },
   "license": "ISC",
   "keywords": [
     "custom",
@@ -22,25 +17,13 @@
   "scripts": {
     "test": "npm run lint",
     "lint": "eslint **/*.js",
-    "start": "jpm run --binary \"C:\\Program Files (x86)\\Firefox Developer Edition\\firefox.exe\" -p dev-edition-default",
-    "watch": "jpm watchpost --post-url http://localhost:8888/",
-    "package": "jpm xpi"
+    "lint-ext": "web-ext lint --source-dir src",
+    "start": "web-ext run --source-dir src --firefox=\"C:\\Program Files (x86)\\Firefox Developer Edition\\firefox.exe\" --firefox-profile=dev-edition-default",
+    "package": "web-ext build --source-dir src --ignore-files .DS_Store yarn.lock"
   },
   "devDependencies": {
     "@methodgrab/eslint-config-standard": "^0.10.0",
     "eslint": "^3.8.0",
-    "jpm": "^1.2.2"
-  },
-  "permissions": {
-    "multiprocess": true
-  },
-  "preferences": [
-    {
-      "name": "customNewTabUrl",
-      "title": "New Tab URL",
-      "description": "The URL to show when a new tab is opened.\nIt should include the \"https\" or \"http\" part.\ne.g. \"https://google.com\".",
-      "type": "string",
-      "value": ""
-    }
-  ]
+    "web-ext": "^2.2.2"
+  }
 }

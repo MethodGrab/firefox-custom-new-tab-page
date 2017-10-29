@@ -1,0 +1,22 @@
+.form__field {
+	margin-bottom: 10px;
+}
+
+.form__label {
+	display: block;
+}
+
+.form__hint {
+	display: block;
+	font-style: italic;
+}
+
+.form__input {
+	display: block;
+	width: 80%;
+	height: 2.5em;
+	margin-top: 6px;
+}
+
+.form__actions {
+}
