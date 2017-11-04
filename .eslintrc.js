@@ -7,7 +7,9 @@ module.exports = {
 
 	env: {},
 
-	globals:  {},
+	globals: {
+		'browser' : true,
+	},
 
 	rules: {
 		'no-param-reassign'     : 'off',

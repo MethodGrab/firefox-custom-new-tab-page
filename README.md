@@ -8,6 +8,7 @@ To set your custom new tab url:
 - Select `Extensions`
 - Select the `Custom New Tab Page` extension → `Options`
 - Enter your URL in the `New Tab URL` box
+- Press save
 - Done!
 
 
@@ -36,7 +37,7 @@ To show [log messages](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/con
 
 After making changes to the extension, do the following to publish a new version:
 
-1. Bump the `version` in `package.json`
+1. Bump the `version` in `src/manifest.json`
 1. Commit the version change and tag the commit with the version number
 1. `npm run package` to bundle the `xpi` file
 1. Upload the generated `xpi` to https://addons.mozilla.org/en-US/developers/addons
