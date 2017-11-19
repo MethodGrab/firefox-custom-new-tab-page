@@ -4,40 +4,29 @@
 
 ## Usage
 To set your custom new tab url:
-- Open `about:addons`
-- Select `Extensions`
-- Select the `Custom New Tab Page` extension → `Options`
-- Enter your URL in the `New Tab URL` box
-- Press save
-- Done!
+1. Open `Add-ons` from the `Menu (☰)` (or navigate to `about:addons` with the address bar)
+1. Select `Extensions`
+1. Select the `Custom New Tab Page` extension → `Options`
+1. Enter your URL in the `New Tab URL` box
+1. Press `Save`
+1. Done!
 
 
 ## Development
 
-Testing unsigned extensions only works with [non-release](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/jpm#Install_a_different_version_of_Firefox) [builds](https://wiki.mozilla.org/Add-ons/Extension_Signing). To install the unsigned extension:
+Testing unsigned extensions only works with [non-release builds](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Getting_started_with_web-ext#Testing_unsigned_extensions), to develop the extension:
+1. Install a [non-release build](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Getting_started_with_web-ext#Testing_unsigned_extensions) (e.g. Firefox Developer Edition)
+1. `npm run start` to load Firefox Developer Edition with the extension installed + watch for changes and reload the extension automatically
 
-- Open Firefox Developer Edition
-- Install the [Extension Auto-Installer](https://addons.mozilla.org/en-US/firefox/addon/autoinstaller) add-on
-- Open `about:config`
-- set `xpinstall.signatures.required` to `false`
-- Close Firefox Developer Edition
-- `npm run start` to load Firefox Developer Edition with the extension installed
-- `npm run watch` to watch for changes and [reload the extension automatically](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/jpm#Developing_without_browser_restarts)
-
-**Note: These `npm` commands assume you're on Windows with Firefox Developer Edition installed, modify the paths as needed.**
-
-
-### Logging
-To show [log messages](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console#Logging_Levels) during development:
-- Open `about:config`
-- Create a new string value called `extensions.custom-new-tab-page@mint.as.sdk.console.logLevel` with a value of `all`
+**Note: `npm run start` assumes you're on Windows with Firefox Developer Edition installed in the default directory. If not, modify the `start` script path in `package.json` as needed.**
 
 
 ## Release Process
 
 After making changes to the extension, do the following to publish a new version:
 
+1. `npm run test`
 1. Bump the `version` in `src/manifest.json`
-1. Commit the version change and tag the commit with the version number
+1. Commit with the version number as the commit message (e.g. `1.0.0`) and tag the commit with the version number (e.g. `v1.0.0`)
 1. `npm run package` to bundle the `xpi` file
 1. Upload the generated `xpi` to https://addons.mozilla.org/en-US/developers/addons
