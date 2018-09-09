@@ -1,7 +1,11 @@
 const log = false;
 
-const showCustomPage = ({ customNewTabUrl }) => {
+const showCustomPage = ({ customNewTabUrl, customNewTabTitle }) => {
 	log && console.debug( '[showCustomPage] init', { customNewTabUrl } );
+
+	if ( customNewTabTitle ) {
+		document.title = customNewTabTitle;
+	}
 
 	// no tab URL set, do nothing
 	if ( !customNewTabUrl || customNewTabUrl.length === 0 ) {
@@ -21,7 +25,7 @@ const showCustomPage = ({ customNewTabUrl }) => {
 };
 
 const init = _ => {
-	browser.storage.sync.get( 'customNewTabUrl' )
+	browser.storage.sync.get( ['customNewTabUrl', 'customNewTabTitle'] )
 		.then( showCustomPage );
 };
 
