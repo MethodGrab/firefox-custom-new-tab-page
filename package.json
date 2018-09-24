@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "test": "npm run lint && npm run lint-ext",
-    "lint": "eslint **/*.js",
+    "lint": "eslint \"**/*.js\"",
     "lint-ext": "web-ext lint --source-dir src",
     "start": "web-ext run --source-dir src --firefox=\"C:\\Program Files (x86)\\Firefox Developer Edition\\firefox.exe\" --firefox-profile=dev-edition-default",
     "package": "web-ext build --source-dir src --ignore-files .DS_Store yarn.lock"
