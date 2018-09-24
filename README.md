@@ -1,4 +1,4 @@
-# Custom New Tab Page
+# Custom New Tab Page [![Build Status](https://travis-ci.org/MethodGrab/firefox-custom-new-tab-page.svg?branch=master)](https://travis-ci.org/MethodGrab/firefox-custom-new-tab-page)
 > A Firefox extension that allows you to specify a custom URL to be shown when opening a new tab, _without changing the address bar content_.
 
 
