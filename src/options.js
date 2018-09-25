@@ -8,12 +8,11 @@ const saveOptions = e => {
 };
 
 const restoreOptions = _ => {
-	const gettingItem = browser.storage.sync.get( ['customNewTabUrl', 'customNewTabTitle'] );
-
-	gettingItem.then( res => {
-		document.getElementById( 'customNewTabUrl' ).value = res.customNewTabUrl || '';
-		document.getElementById( 'customNewTabTitle' ).value = res.customNewTabTitle || '';
-	});
+	browser.storage.sync.get([ 'customNewTabUrl', 'customNewTabTitle' ])
+		.then( options => {
+			document.getElementById( 'customNewTabUrl' ).value = options.customNewTabUrl || '';
+			document.getElementById( 'customNewTabTitle' ).value = options.customNewTabTitle || '';
+		});
 };
 
 document.addEventListener( 'DOMContentLoaded', restoreOptions );
