@@ -1,7 +1,11 @@
 const log = false;
 
-const showCustomPage = ({ customNewTabUrl }) => {
+const showCustomPage = ({ customNewTabUrl, customNewTabTitle }) => {
 	log && console.debug( '[showCustomPage] init', { customNewTabUrl } );
+
+	if ( customNewTabTitle ) {
+		document.title = customNewTabTitle;
+	}
 
 	// no tab URL set, do nothing
 	if ( !customNewTabUrl || customNewTabUrl.length === 0 ) {
@@ -9,19 +13,19 @@ const showCustomPage = ({ customNewTabUrl }) => {
 		return;
 	}
 
-	document.querySelector( 'html' ).classList.add( 'cntp-has-loaded' );
+	document.documentElement.classList.add( 'cntp-has-loaded' );
 
 	// The `type="content"` attribute is used for security purposes to avoid
 	// giving the iframe a privileged context that could be used to
 	// access browser (cookies, history, etc) or user files.
 	// See https://mdn.io/Displaying_web_content_in_an_extension_without_security_issues
-	const iframe = document.querySelector( '#cntp-iframe' );
+	const iframe = document.getElementById( 'cntp-iframe' );
 	iframe.src = customNewTabUrl;
 
 };
 
 const init = _ => {
-	browser.storage.sync.get( 'customNewTabUrl' )
+	browser.storage.sync.get( ['customNewTabUrl', 'customNewTabTitle'] )
 		.then( showCustomPage );
 };
 
