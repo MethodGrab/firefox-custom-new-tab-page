@@ -1,7 +1,15 @@
 const log = false;
 
-const showCustomPage = ({ customNewTabUrl, customNewTabTitle }) => {
-	log && console.debug( '[showCustomPage] init', { customNewTabUrl, customNewTabTitle } );
+const showCustomPage = ({ customNewTabUrl, customNewTabTitle, theme }) => {
+	log && console.debug( '[showCustomPage] init', { customNewTabUrl, customNewTabTitle, theme } );
+
+	if ( theme === 'light' ) {
+		document.body.classList.add( 't-light' );
+	}
+
+	if ( theme === 'dark' ) {
+		document.body.classList.add( 't-dark' );
+	}
 
 	if ( customNewTabTitle ) {
 		document.title = customNewTabTitle;
@@ -15,17 +23,14 @@ const showCustomPage = ({ customNewTabUrl, customNewTabTitle }) => {
 
 	document.documentElement.classList.add( 'cntp-has-loaded' );
 
-	// The `type="content"` attribute is used for security purposes to avoid
-	// giving the iframe a privileged context that could be used to
-	// access browser (cookies, history, etc) or user files.
-	// See https://mdn.io/Displaying_web_content_in_an_extension_without_security_issues
+	const onload = _ => document.body.classList.remove( 'is-loading' );
 	const iframe = document.getElementById( 'cntp-iframe' );
+	iframe.onload = onload;
 	iframe.src = customNewTabUrl;
-
 };
 
 const init = _ => {
-	browser.storage.sync.get([ 'customNewTabUrl', 'customNewTabTitle' ])
+	browser.storage.sync.get([ 'customNewTabUrl', 'customNewTabTitle', 'theme' ])
 		.then( showCustomPage );
 };
 

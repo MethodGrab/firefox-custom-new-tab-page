@@ -8,9 +8,9 @@
 	<link rel="stylesheet" href="options.css">
 </head>
 <body>
-	<form>
+	<form class="form">
 		<div class="form__field">
-			<label class="form__label">New Tab URL</label>
+			<label class="form__label" for="customNewTabUrl">New Tab URL</label>
 
 			<span class="form__hint">
 				The URL to show when a new tab is opened. It should include the "https" or "http" part.
@@ -18,15 +18,27 @@
 				The site must allow iframe embedding or it won’t work.
 			</span>
 
-			<input class="form__input" type="text" id="customNewTabUrl" placeholder="https://example.com">
+			<input class="form__input form__input--textlike" type="text" id="customNewTabUrl" placeholder="https://example.com">
 		</div>
 
 		<div class="form__field">
-			<label class="form__label">New Tab Title</label>
+			<label class="form__label" for="customNewTabTitle">New Tab Title</label>
 
 			<span class="form__hint">The text that is shown in the tab bar for the new tab.</span>
 
-			<input class="form__input" type="text" id="customNewTabTitle" placeholder="New Tab">
+			<input class="form__input form__input--textlike" type="text" id="customNewTabTitle" placeholder="New Tab">
+		</div>
+
+		<div class="form__field">
+			<label class="form__label" for="theme">Theme</label>
+
+			<span class="form__hint">The background colour used while the page is loading.</span>
+
+			<select class="form__input form__input--select" id="theme">
+				<option value="none">None</option>
+				<option value="light">Light</option>
+				<option value="dark">Dark</option>
+			</select>
 		</div>
 
 		<footer class="form__actions">
