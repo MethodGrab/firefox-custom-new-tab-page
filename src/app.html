@@ -7,7 +7,13 @@
 	<title>New Tab</title>
 	<link rel="stylesheet" href="app.css">
 </head>
-<body>
+<body class="is-loading">
+	<!--
+	The `type="content"` attribute is used for security purposes to avoid
+	giving the iframe a privileged context that could be used to
+	access browser (cookies, history, etc) or user files.
+	See https://mdn.io/Displaying_web_content_in_an_extension_without_security_issues
+	-->
 	<iframe id="cntp-iframe" class="cntp-iframe" type="content" src="about:blank"></iframe>
 	<script src="app.js"></script>
 </body>
