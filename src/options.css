@@ -1,3 +1,8 @@
+/* GENERIC HELPER */
+.is-hidden { display: none !important; }
+
+
+/* GENERIC FORM */
 .form {
 	padding: 12px 0;
 }
@@ -33,3 +38,13 @@
 }
 
 .form__actions {}
+
+
+/* CUSTOM */
+.field-theme__inputs {
+	display: flex;
+}
+
+.field-theme__custom-background-color {
+	margin-left: 1em;
+}
