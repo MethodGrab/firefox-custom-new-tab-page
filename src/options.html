@@ -34,11 +34,17 @@
 
 			<span class="form__hint">The background colour used while the page is loading.</span>
 
-			<select class="form__input form__input--select" id="theme">
-				<option value="none">None</option>
-				<option value="light">Light</option>
-				<option value="dark">Dark</option>
-			</select>
+			<div class="field-theme__inputs">
+				<select class="form__input form__input--select" id="theme">
+					<option value="none">None</option>
+					<option value="light">Light</option>
+					<option value="dark">Dark</option>
+					<option value="custom">Custom</option>
+				</select>
+
+				<input class="form__input field-theme__custom-background-color is-hidden" type="color" id="customBackgroundColor">
+			</div>
+
 		</div>
 
 		<footer class="form__actions">
