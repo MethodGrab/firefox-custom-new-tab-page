@@ -13,7 +13,7 @@ const restoreOptions = _ => {
 		.then( options => {
 			document.getElementById( 'customNewTabUrl' ).value = options.customNewTabUrl || '';
 			document.getElementById( 'customNewTabTitle' ).value = options.customNewTabTitle || '';
-			document.getElementById( 'theme' ).value = options.theme || 'none';
+			document.getElementById( 'theme' ).value = options.theme || 'transparent';
 		});
 };
 
