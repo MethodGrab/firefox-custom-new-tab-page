@@ -21,7 +21,7 @@ const showCustomPage = ({ customNewTabUrl, customNewTabTitle, theme }) => {
 
 	const onload = _ => document.body.classList.remove( 'is-loading' );
 	const iframe = document.getElementById( 'cntp-iframe' );
-	if ( theme ) { iframe.body.style.backgroundColor = theme }
+	if ( theme ) { iframe.body.style.backgroundColor = theme; }
 	iframe.onload = onload;
 	iframe.src = customNewTabUrl;
 };
