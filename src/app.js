@@ -27,10 +27,21 @@ const showCustomPage = opts => {
 
 	document.documentElement.classList.add( 'cntp-has-loaded' );
 
-	const onload = _ => document.body.classList.remove( 'is-loading' );
-	const iframe = document.getElementById( 'cntp-iframe' );
-	iframe.onload = onload;
+	/*
+	The `type="content"` attribute is used for security purposes to avoid
+	giving the iframe a privileged context that could be used to
+	access browser (cookies, history, etc) or user files.
+	See https://mdn.io/Displaying_web_content_in_an_extension_without_security_issues
+	*/
+	const iframe = document.createElement( 'iframe' );
+	iframe.id = 'cntp-iframe';
+	iframe.classList.add( 'cntp-iframe' );
+	iframe.setAttribute( 'type', 'content' );
+	iframe.setAttribute( 'allow', 'geolocation' );
+	iframe.onload = _ => document.body.classList.remove( 'is-loading' );
 	iframe.src = opts.customNewTabUrl;
+
+	document.body.append( iframe );
 };
 
 const init = _ => {
