@@ -3,12 +3,8 @@ const log = false;
 const showCustomPage = ({ customNewTabUrl, customNewTabTitle, theme }) => {
 	log && console.debug( '[showCustomPage] init', { customNewTabUrl, customNewTabTitle, theme } );
 
-	if ( theme === 'light' ) {
-		document.body.classList.add( 't-light' );
-	}
-
-	if ( theme === 'dark' ) {
-		document.body.classList.add( 't-dark' );
+	if ( theme ) {
+		document.body.backgroundColor = theme;
 	}
 
 	if ( customNewTabTitle ) {
@@ -25,6 +21,7 @@ const showCustomPage = ({ customNewTabUrl, customNewTabTitle, theme }) => {
 
 	const onload = _ => document.body.classList.remove( 'is-loading' );
 	const iframe = document.getElementById( 'cntp-iframe' );
+	if ( theme ) { iframe.body.style.backgroundColor = theme }
 	iframe.onload = onload;
 	iframe.src = customNewTabUrl;
 };
