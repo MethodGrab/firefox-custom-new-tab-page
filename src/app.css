@@ -13,14 +13,6 @@ body {
 	height: 100vh;
 }
 
-body.t-light {
-	background-color: #fff;
-}
-
-body.t-dark {
-	background-color: #323234;
-}
-
 .cntp-iframe {
 	position: absolute;
 	top: 0;
