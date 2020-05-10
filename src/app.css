@@ -11,6 +11,7 @@ body {
 	overflow: hidden;
 	width: 100vw;
 	height: 100vh;
+	background-color: #000;
 }
 
 .cntp-iframe {
@@ -20,4 +21,5 @@ body {
 	width: 100vw;
 	height: 100vh;
 	border: 0;
+	background-color: #000;
 }
