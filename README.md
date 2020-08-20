@@ -1,4 +1,10 @@
 # Custom New Tab Page [![Build Status](https://travis-ci.org/MethodGrab/firefox-custom-new-tab-page.svg?branch=master)](https://travis-ci.org/MethodGrab/firefox-custom-new-tab-page)
+
+[![Version](https://img.shields.io/amo/v/custom-new-tab-page)][amo]
+[![Rating](https://img.shields.io/amo/rating/custom-new-tab-page)][amo]
+[![Users](https://img.shields.io/amo/users/custom-new-tab-page)][amo]
+[![Downloads](https://img.shields.io/amo/dw/custom-new-tab-page)][amo]
+
 > A Firefox extension that allows you to specify a custom URL to be shown when opening a new tab, _without changing the address bar content_.
 
 
@@ -31,3 +37,6 @@ To publish a new version:
 1. Commit with the version number as the commit message (e.g. `:bookmark: 1.0.0`) and tag the commit with the version number (e.g. `v1.0.0`)
 1. `npm run package` to bundle the extension as a `zip` file
 1. Upload the generated `zip` to https://addons.mozilla.org/en-US/developers/addons
+
+
+[amo]: https://addons.mozilla.org/en-GB/firefox/addon/custom-new-tab-page
