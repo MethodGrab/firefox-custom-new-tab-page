@@ -18,6 +18,12 @@ module.exports = {
 			allowShortCircuit: true,
 			allowTernary: true,
 		}],
+		'no-unused-vars': [ 'warn', {
+			vars: 'all',
+			args: 'none',
+			argsIgnorePattern: '^_$',
+			ignoreRestSiblings: true,
+		}],
 		'no-warning-comments': [ 'warn', {
 			terms: [ 'fixme', 'xxx' ],
 			location: 'start',

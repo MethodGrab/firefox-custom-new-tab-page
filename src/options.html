@@ -15,7 +15,7 @@
 			<span class="form__hint">
 				The URL to show when a new tab is opened. It should include the "https" or "http" part.
 				<br>
-				The site must allow iframe embedding or it won’t work.
+				If the site does not allow iframe embedding enable the "Remove iframe headers" option below.
 			</span>
 
 			<input class="form__input form__input--textlike" type="text" id="customNewTabUrl" placeholder="https://example.com">
@@ -45,6 +45,20 @@
 				<input class="form__input field-theme__custom-background-color is-hidden" type="color" id="customBackgroundColor">
 			</div>
 
+		</div>
+
+		<div class="form__field">
+			<label class="form__label" for="removeIframeHeaders">Remove iframe headers?</label>
+
+			<input type="checkbox" id="removeIframeHeaders">
+
+			<span class="form__hint">
+				If checked then this will remove any <code class="code">X-Frame-Options</code> headers from your new tab URL.
+				<br>
+				If you see an error like "Blocked by X-Frame-Options Policy" or "To protect your security, example.com will not allow Firefox to display the page if another site has embedded it. To see this page, you need to open it in a new window." then you can enable this option to get around the error.
+				<br>
+				This requires several extra permissions which you will be prompted to allow if you check this box.
+			</span>
 		</div>
 
 		<div class="form__field">

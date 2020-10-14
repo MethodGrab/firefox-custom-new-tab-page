@@ -19,6 +19,85 @@ const toMatchPattern = urlStr => {
 	}
 };
 
+// Creates a matcher for any page on a given domain.
+// toWildcardDomainMatchPattern('https://example.com') // -> 'https://*.example.com/*'
+// toWildcardDomainMatchPattern('https://example.com:3000/foo/bar.html') // -> 'https://*.example.com:3000/*'
+const toWildcardDomainMatchPattern = urlStr => {
+	try {
+		const url = new URL( urlStr );
+		const pattern = `${url.protocol}//*.${url.host}/*`;
+
+		log && console.debug( '#toWildcardDomainMatchPattern', { pattern } );
+		return pattern;
+	} catch ( err ) {
+		console.error( '#toWildcardDomainMatchPattern', err );
+		return false;
+	}
+};
+
+class PermissionSet {
+	constructor(permissions, origins) {
+		this.permissions = permissions;
+		this.origins = origins;
+	}
+
+	get() {
+		return {
+			permissions: this.permissions,
+			origins: this.origins,
+		};
+	}
+
+	async granted() {
+		return await browser.permissions.contains( this.get() );
+	}
+}
+
+
+// option: removeIframeHeaders
+const getRemoveIframeHeadersValue = _ => {
+	const value = document.getElementById( 'removeIframeHeaders' ).checked;
+	log && console.debug( '#getRemoveIframeHeadersValue', value );
+
+	return value;
+};
+
+
+const setRemoveIframeHeadersValue = value => {
+	log && console.debug( '#setRemoveIframeHeadersValue', value );
+	document.getElementById( 'removeIframeHeaders' ).checked = value;
+};
+
+// :: PermissionSet|null
+const removeIframeHeadersPermissions = _ => {
+	const customNewTabUrl = document.getElementById( 'customNewTabUrl' ).value;
+
+	if ( customNewTabUrl && getRemoveIframeHeadersValue() ) {
+		const matchPattern = toWildcardDomainMatchPattern( customNewTabUrl );
+
+		log && console.debug( '#removeIframeHeadersPermissions', { matchPattern } );
+
+		if ( !matchPattern ) {
+			// TODO: if the URL is not valid for removeIframeHeaders the option should be disabled with a note explaining why!
+			return null;
+		}
+
+		const permissionSet = new PermissionSet(
+			[
+				'webRequest',
+				'webRequestBlocking',
+			],
+			[ matchPattern ],
+		);
+
+		log && console.debug( '#removeIframeHeadersPermissions', permissionSet.get() );
+
+		return permissionSet;
+	}
+
+	return null;
+};
+
 
 // option: forceOpenInTopFrame
 const getForceOpenInTopFrameValue = _ => {
@@ -35,79 +114,34 @@ const setForceOpenInTopFrameValue = value => {
 };
 
 
-const forceOpenInTopFramePermissions = [
-	'webRequest',
-	'webRequestBlocking',
-];
-
-
-const revokeForceOpenInTopFramePermissions = async _ => {
-	const revokedSuccessfully = await browser.permissions.remove({ permissions: forceOpenInTopFramePermissions });
-	log && console.debug( '#revokeForceOpenInTopFramePermissions', { revokedSuccessfully } );
-
-	return revokedSuccessfully;
-};
-
-
-const requestForceOpenInTopFramePermissions = async _ => {
-	const customNewTabUrl = document.getElementById( 'customNewTabUrl' ).value;
-	const matchPattern = toMatchPattern( customNewTabUrl );
-
-	log && console.debug( '#requestForceOpenInTopFramePermissions', { matchPattern } );
-
-	if ( !matchPattern ) {
-		// TODO: if the URL is not valid for forceOpenInTopFrame the option should be disabled with a note explaining why!
-		return false;
-	}
-
-	const permissionsToRequest = {
-		permissions: forceOpenInTopFramePermissions,
-		origins: [ matchPattern ],
-	};
-
-	let permissionsGranted = false;
-
-	try {
-		permissionsGranted = await browser.permissions.request( permissionsToRequest );
-	} catch ( err ) {
-		console.error( '#requestForceOpenInTopFramePermissions // request permissions failed', err );
-	}
-
-	log && console.debug( '#requestForceOpenInTopFramePermissions', permissionsToRequest, { permissionsGranted } );
-
-	return permissionsGranted;
-};
-
-
-const maybeRequestForceOpenInTopFramePermissions = async _ => {
+// :: PermissionSet|null
+const forceOpenInTopFramePermissions = _ => {
 	const customNewTabUrl = document.getElementById( 'customNewTabUrl' ).value;
 
 	if ( customNewTabUrl && getForceOpenInTopFrameValue() ) {
-		const permissionsGranted = await requestForceOpenInTopFramePermissions();
+		const matchPattern = toMatchPattern( customNewTabUrl );
 
-		if ( !permissionsGranted ) {
-			setForceOpenInTopFrameValue( false );
+		log && console.debug( '#forceOpenInTopFramePermissions', { matchPattern } );
+
+		if ( !matchPattern ) {
+			// TODO: if the URL is not valid for forceOpenInTopFrame the option should be disabled with a note explaining why!
+			return null;
 		}
+
+		const permissionSet = new PermissionSet(
+			[
+				'webRequest',
+				'webRequestBlocking',
+			],
+			[ matchPattern ],
+		);
+
+		log && console.debug( '#forceOpenInTopFramePermissions', permissionSet.get() );
+
+		return permissionSet;
 	}
 
 	return null;
-};
-
-
-const forceOpenInTopFrameChanged = async _ => {
-	const forceOpenInTopFrameEnabled = getForceOpenInTopFrameValue();
-	log && console.debug( '#forceOpenInTopFrameChanged', { forceOpenInTopFrameEnabled } );
-
-	if ( forceOpenInTopFrameEnabled ) {
-		const permissionsGranted = await requestForceOpenInTopFramePermissions();
-		log && console.debug( '#forceOpenInTopFrameChanged', { permissionsGranted } );
-
-		if ( !permissionsGranted ) {
-			setForceOpenInTopFrameValue( false );
-		}
-	} else {
-		revokeForceOpenInTopFramePermissions();
-	}
 };
 
 
@@ -123,6 +157,75 @@ const updateCustomBackgroundColorVisibility = _ => {
 };
 
 
+// permissions
+const requiredPermissions = _ => {
+	const permissionsToRequest = [
+		removeIframeHeadersPermissions(),
+		forceOpenInTopFramePermissions(),
+	]
+		.filter(r => r instanceof PermissionSet)
+		.reduce(
+			(acc, permissionSet) => {
+				const { permissions, origins } = permissionSet.get();
+				return {
+					permissions: acc.permissions.concat(permissions),
+					origins: acc.origins.concat(origins),
+				};
+			},
+			{ permissions: [], origins: [] },
+		);
+
+	log && console.debug( '#requiredPermissions', { permissionsToRequest } );
+	return permissionsToRequest;
+};
+
+const requestPermissions = async _ => {
+	const permissionsToRequest = requiredPermissions();
+	let permissionsGranted = false;
+	log && console.debug( '#requestPermissions', { permissionsToRequest } );
+
+	try {
+		permissionsGranted = await browser.permissions.request( permissionsToRequest );
+	} catch ( err ) {
+		console.error( '#requestPermissions // request permissions failed', err );
+	}
+
+	log && console.debug( '#requestPermissions', { permissionsGranted } );
+
+	return permissionsGranted;
+};
+
+const revokeUnusedPermissions = async _ => {
+	// TODO: not implemented
+	log && console.debug( '#revokeUnusedPermissions (NOT IMPLEMENTED)' );
+	return null;
+};
+
+const checkPermissions = async _ => {
+	const removeIframeHeadersPermissions_ = removeIframeHeadersPermissions();
+
+	if ( !removeIframeHeadersPermissions_ || ( removeIframeHeadersPermissions_ && !( await removeIframeHeadersPermissions_.granted() ) ) ) {
+		log && console.debug( '#checkPermissions // removeIframeHeaders permissions not found... unchecking option' );
+		setRemoveIframeHeadersValue( false );
+	}
+
+	const forceOpenInTopFramePermissions_ = forceOpenInTopFramePermissions();
+
+	if ( !forceOpenInTopFramePermissions_ || ( forceOpenInTopFramePermissions_ && !( await forceOpenInTopFramePermissions_.granted() ) ) ) {
+		log && console.debug( '#checkPermissions // forceOpenInTopFrame permissions not found... unchecking option' );
+		setForceOpenInTopFrameValue( false );
+	}
+
+	return null;
+};
+
+const refreshPermissions = async _ => {
+	await revokeUnusedPermissions();
+	await requestPermissions();
+	await checkPermissions();
+};
+
+
 // general form
 const saveOptions = async e => {
 	e.preventDefault();
@@ -132,6 +235,7 @@ const saveOptions = async e => {
 		customNewTabTitle: document.getElementById( 'customNewTabTitle' ).value,
 		theme: document.getElementById( 'theme' ).value,
 		customBackgroundColor: document.getElementById( 'customBackgroundColor' ).value,
+		removeIframeHeaders: getRemoveIframeHeadersValue(),
 		forceOpenInTopFrame: getForceOpenInTopFrameValue(),
 	};
 
@@ -147,6 +251,7 @@ const restoreOptions = async _ => {
 		'customNewTabTitle',
 		'theme',
 		'customBackgroundColor',
+		'removeIframeHeaders',
 		'forceOpenInTopFrame',
 	]);
 
@@ -157,6 +262,7 @@ const restoreOptions = async _ => {
 	document.getElementById( 'theme' ).value = options.theme || 'none';
 	document.getElementById( 'customBackgroundColor' ).value = options.customBackgroundColor || '';
 
+	setRemoveIframeHeadersValue( typeof options.removeIframeHeaders === 'undefined' ? false : options.removeIframeHeaders );
 	setForceOpenInTopFrameValue( typeof options.forceOpenInTopFrame === 'undefined' ? false : options.forceOpenInTopFrame );
 
 	updateCustomBackgroundColorVisibility();
@@ -172,7 +278,8 @@ document.addEventListener( 'DOMContentLoaded', restoreOptions );
 document.querySelector( 'form' ).addEventListener( 'submit', saveOptions );
 
 // this blur will fail with `permissions.request may only be called from a user input handler` if the input is programatically blurred (e.g. by changing tab while focused on the input) but thats ok.
-document.getElementById( 'customNewTabUrl' ).addEventListener( 'blur', maybeRequestForceOpenInTopFramePermissions );
+document.getElementById( 'customNewTabUrl' ).addEventListener( 'blur', refreshPermissions );
 
 document.getElementById( 'theme' ).addEventListener( 'change', updateCustomBackgroundColorVisibility );
-document.getElementById( 'forceOpenInTopFrame' ).addEventListener( 'change', forceOpenInTopFrameChanged );
+document.getElementById( 'removeIframeHeaders' ).addEventListener( 'change', refreshPermissions );
+document.getElementById( 'forceOpenInTopFrame' ).addEventListener( 'change', refreshPermissions );
