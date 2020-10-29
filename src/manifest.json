@@ -25,9 +25,9 @@
     "storage"
   ],
   "optional_permissions": [
+    "<all_urls>",
     "webRequest",
-    "webRequestBlocking",
-    "<all_urls>"
+    "webRequestBlocking"
   ],
   "chrome_url_overrides" : {
     "newtab": "app.html"

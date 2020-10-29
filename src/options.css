@@ -1,6 +1,12 @@
 /* GENERIC HELPER */
 .is-hidden { display: none !important; }
 
+/* GENERIC OTHER */
+.code {
+	padding: 0 2px;
+	background-color: #e6e6e6;
+	font-size: inherit;
+}
 
 /* GENERIC FORM */
 .form {
