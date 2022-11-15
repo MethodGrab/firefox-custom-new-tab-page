@@ -9,6 +9,7 @@
 
 
 ## Usage
+
 To set your custom new tab url:
 1. Open `Add-ons` from the `Menu (☰)` (or navigate to `about:addons` with the address bar)
 1. Select `Extensions`
@@ -24,8 +25,6 @@ Testing unsigned extensions only works with [non-release builds](https://develop
 1. Install a [non-release build](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Getting_started_with_web-ext#Testing_unsigned_extensions) (e.g. Firefox Developer Edition)
 1. `npm install`
 1. `npm run start` to load Firefox Developer Edition with the extension installed. Making changes to the code will automatically reload the extension.
-
-**Note: `npm run start` assumes you're on Windows with Firefox Developer Edition installed in the default directory. If not, modify the `start` script path in `package.json` as needed.**
 
 
 ## Release Process
