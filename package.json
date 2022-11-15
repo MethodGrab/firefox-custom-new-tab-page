@@ -18,7 +18,7 @@
     "test": "npm run lint && npm run lint-ext",
     "lint": "eslint --max-warnings 0 \"**/*.js\"",
     "lint-ext": "web-ext lint --source-dir src",
-    "start": "web-ext run --source-dir src --firefox=firefoxdeveloperedition --firefox-profile=dev-edition-default",
+    "start": "web-ext run --source-dir src --firefox=firefoxdeveloperedition",
     "package": "web-ext build --source-dir src --ignore-files .DS_Store"
   },
   "devDependencies": {
