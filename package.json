@@ -15,11 +15,12 @@
     "url"
   ],
   "scripts": {
-    "test": "npm run lint && npm run lint-ext",
-    "lint": "eslint --max-warnings 0 \"**/*.js\"",
-    "lint-ext": "web-ext lint --source-dir src",
+    "lint": "npm run lint:code && npm run lint:ext",
+    "lint:code": "eslint --max-warnings 0 \"**/*.js\"",
+    "lint:ext": "web-ext lint --source-dir src",
+    "package": "web-ext build --source-dir src --ignore-files .DS_Store",
     "start": "web-ext run --source-dir src --firefox=firefoxdeveloperedition",
-    "package": "web-ext build --source-dir src --ignore-files .DS_Store"
+    "validate": "npm run lint"
   },
   "devDependencies": {
     "@methodgrab/eslint-config-standard": "^0.10.0",

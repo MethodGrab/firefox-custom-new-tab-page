@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js (lts/*)
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: npm ci
+        run: npm ci
+
+      - name: Validate
+        run: npm run validate
