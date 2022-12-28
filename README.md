@@ -32,7 +32,7 @@ Testing unsigned extensions only works with [non-release builds](https://develop
 
 To publish a new version:
 
-1. `npm run test`
+1. `npm run validate`
 1. Bump the `version` in `src/manifest.json`
 1. Commit with the version number as the commit message (e.g. `:bookmark: 1.0.0`) and tag the commit with the version number (e.g. `v1.0.0`)
 1. `npm run package` to bundle the extension as a `zip` file
