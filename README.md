@@ -1,6 +1,6 @@
 # Custom New Tab Page
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/MethodGrab/firefox-custom-new-tab-page/CI?style=flat-square)](https://github.com/MethodGrab/firefox-custom-new-tab-page/actions/workflows/CI.yaml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/MethodGrab/firefox-custom-new-tab-page/CI.yaml?branch=master&style=flat-square)](https://github.com/MethodGrab/firefox-custom-new-tab-page/actions/workflows/CI.yaml)
 [![Version](https://img.shields.io/amo/v/custom-new-tab-page?style=flat-square)][amo]
 [![Rating](https://img.shields.io/amo/rating/custom-new-tab-page?style=flat-square)][amo]
 [![Users](https://img.shields.io/amo/users/custom-new-tab-page?style=flat-square)][amo]
