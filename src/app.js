@@ -1,7 +1,18 @@
 const log = false;
 
-const showCustomPage = opts => {
+const showCustomPage = async opts => {
 	log && console.debug( '[showCustomPage] init', opts );
+
+	if (opts.theme === 'theme') {
+		let browserNTPBackground;
+		try {
+			browserNTPBackground = await browser.theme.getCurrent().then(res => res.colors.ntp_background);
+		} catch {
+			browserNTPBackground = "#F9F9FB"
+		}
+
+		document.body.style.backgroundColor = browserNTPBackground;
+	}
 
 	if ( opts.theme === 'light' ) {
 		document.body.classList.add( 't-light' );
