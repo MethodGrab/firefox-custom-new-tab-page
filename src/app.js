@@ -4,7 +4,13 @@ const showCustomPage = async opts => {
 	log && console.debug( '[showCustomPage] init', opts );
 
 	if (opts.theme === 'theme') {
-		const browserNTPBackground = await browser.theme.getCurrent().then(res => res.colors.ntp_background);
+		let browserNTPBackground;
+		try {
+			browserNTPBackground = await browser.theme.getCurrent().then(res => res.colors.ntp_background);
+		} catch {
+			browserNTPBackground = "#F9F9FB"
+		}
+
 		document.body.style.backgroundColor = browserNTPBackground;
 	}
 
