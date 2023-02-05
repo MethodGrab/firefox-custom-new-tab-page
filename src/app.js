@@ -55,8 +55,3 @@ const init = _ => {
 };
 
 init();
-
-var x = document.getElementById("cntp-iframe");
-var y = (x.contentWindow || x.contentDocument);
-if (y.document)y = y.document;
-y.body.style.backgroundColor = "red";

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Custom New Tab Page",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Specify a custom URL to be shown when opening a new tab, without changing the address bar content",
   "developer": {
     "name": "MethodGrab",
