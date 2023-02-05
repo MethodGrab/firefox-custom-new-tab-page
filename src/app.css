@@ -13,12 +13,19 @@ body {
 	height: 100vh;
 }
 
+/* Prevent flash of light theme colour when in dark */
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #2B2A33;
+	}
+}
+
 body.t-light {
-	background-color: #fff;
+	background-color: #F9F9FB;
 }
 
 body.t-dark {
-	background-color: #323234;
+	background-color: #2B2A33;
 }
 
 .cntp-iframe {

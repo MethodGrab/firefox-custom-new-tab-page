@@ -1,7 +1,12 @@
 const log = false;
 
-const showCustomPage = opts => {
+const showCustomPage = async opts => {
 	log && console.debug( '[showCustomPage] init', opts );
+
+	if (opts.theme === 'theme') {
+		const browserNTPBackground = await browser.theme.getCurrent().then(res => res.colors.ntp_background);
+		document.body.style.backgroundColor = browserNTPBackground;
+	}
 
 	if ( opts.theme === 'light' ) {
 		document.body.classList.add( 't-light' );
@@ -50,3 +55,8 @@ const init = _ => {
 };
 
 init();
+
+var x = document.getElementById("cntp-iframe");
+var y = (x.contentWindow || x.contentDocument);
+if (y.document)y = y.document;
+y.body.style.backgroundColor = "red";
